@@ -11,15 +11,42 @@ struct ContentView: View {
     @State private var guess = ""
     @State private var guesses = [String]()
     @State private var answer = ""
+    @State private var isGameOver = false
+    
     let answerLength = 4
     
     func submitGuess( ) {
-        guesses.append(guess)
+        guard Set(guess).count == answerLength else { return }
+        guard guess.count == answerLength else { return }
+        
+        let badCharacters = CharacterSet(charactersIn: "0123456789").inverted
+        guard guess.rangeOfCharacter(from: badCharacters) == nil else { return }
+        
+        guesses.insert(guess, at: 0)
+        
+        if result(for: guess).contains("\(answerLength)b") {
+            isGameOver = true
+        }
+        
         guess = ""
     }
     
     func result(for guess: String) -> String {
-        "Result"
+        var bulls = 0
+        var cows = 0
+        
+        let guessLetters = Array(guess)
+        let answerLetters = Array(answer)
+        
+        for (index, letter) in guessLetters.enumerated() {
+            if letter == answerLetters[index]  {
+                bulls += 1
+            } else if  answerLetters.contains(letter) {
+                cows += 1
+            }
+        }
+        
+        return "\(bulls)b \(cows)c"
     }
     
     func startNewGame() {
@@ -53,6 +80,11 @@ struct ContentView: View {
         .frame(width: 250)
         .frame(minHeight: 300)
         .onAppear(perform: startNewGame)
+        .alert("You win!", isPresented: $isGameOver) {
+            Button("OK", action: startNewGame)
+        } message: {
+            Text("Congratulations! Click OK to play again.")
+        }
     }
 }
 
