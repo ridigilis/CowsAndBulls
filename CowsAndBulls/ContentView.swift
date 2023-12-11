@@ -13,7 +13,10 @@ struct ContentView: View {
     @State private var answer = ""
     @State private var isGameOver = false
     
-    let answerLength = 4
+    @AppStorage("maximumGuesses") var maximumGuesses = 100
+    @AppStorage("answerLength") var answerLength = 4
+    @AppStorage("enableHardMode") var enableHardMode = false
+    @AppStorage("showGuessCount") var showGuessCount = false
     
     func submitGuess( ) {
         guard Set(guess).count == answerLength else { return }
@@ -24,7 +27,7 @@ struct ContentView: View {
         
         guesses.insert(guess, at: 0)
         
-        if result(for: guess).contains("\(answerLength)b") {
+        if result(for: guess).contains("\(answerLength)b") || (guesses.count == maximumGuesses) {
             isGameOver = true
         }
         
@@ -50,6 +53,8 @@ struct ContentView: View {
     }
     
     func startNewGame() {
+        guard answerLength >= 3 && answerLength <= 8 else { return }
+        
         guess = ""
         guesses.removeAll()
         answer = ""
@@ -70,22 +75,34 @@ struct ContentView: View {
             }
             .padding()
             
-            List(guesses, id: \.self) { guess in
+            List(0..<guesses.count, id: \.self) { index in
+                let guess = guesses[index]
+                let shouldShowResult = (enableHardMode == false) || (enableHardMode && index == 0)
+                
                 HStack {
                     Text(guess)
+                    
                     Spacer()
-                    Text(result(for: guess))
+                    
+                    if shouldShowResult {
+                        Text(result(for: guess))
+                    }
                 }
             }
             .listStyle(.sidebar)
+            
+            if showGuessCount {
+                Text("Guesses: \(guesses.count)/\(maximumGuesses)")
+                    .padding()
+            }
         }
         .frame(width: 250)
         .frame(minHeight: 300)
         .onAppear(perform: startNewGame)
-        .alert("You win!", isPresented: $isGameOver) {
+        .alert(guesses.count < maximumGuesses ? "You win!" : "Sorry, you lose!", isPresented: $isGameOver) {
             Button("OK", action: startNewGame)
         } message: {
-            Text("Congratulations! Click OK to play again.")
+            Text(guesses.count < maximumGuesses ? "Congratulations! Click OK to play again." : "Click OK to try again.")
         }
         .navigationTitle("Cows and Bulls")
         .touchBar {

@@ -14,5 +14,7 @@ struct CowsAndBullsApp: App {
             ContentView()
         }
         .windowResizability(.contentSize)
+        
+        Settings(content: SettingsView.init)
     }
 }

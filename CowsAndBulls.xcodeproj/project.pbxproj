@@ -11,6 +11,7 @@
 		59E573F12B235754008ADF2A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E573F02B235754008ADF2A /* ContentView.swift */; };
 		59E573F32B235756008ADF2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59E573F22B235756008ADF2A /* Assets.xcassets */; };
 		59E573F62B235756008ADF2A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59E573F52B235756008ADF2A /* Preview Assets.xcassets */; };
+		59E574022B279095008ADF2A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E574012B279095008ADF2A /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		59E573F22B235756008ADF2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59E573F52B235756008ADF2A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		59E573F72B235756008ADF2A /* CowsAndBulls.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CowsAndBulls.entitlements; sourceTree = "<group>"; };
+		59E574012B279095008ADF2A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				59E573EE2B235754008ADF2A /* CowsAndBullsApp.swift */,
+				59E574012B279095008ADF2A /* SettingsView.swift */,
 				59E573F02B235754008ADF2A /* ContentView.swift */,
 				59E573F22B235756008ADF2A /* Assets.xcassets */,
 				59E573F72B235756008ADF2A /* CowsAndBulls.entitlements */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59E574022B279095008ADF2A /* SettingsView.swift in Sources */,
 				59E573F12B235754008ADF2A /* ContentView.swift in Sources */,
 				59E573EF2B235754008ADF2A /* CowsAndBullsApp.swift in Sources */,
 			);
